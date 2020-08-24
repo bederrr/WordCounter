@@ -23,7 +23,7 @@
                 CheckConfiguration();
                 Provider = ConfigureServices(new ServiceCollection());
 
-                var calc = Provider.GetRequiredService<Counter>();
+                var calc = Provider.GetRequiredService<ICounter>();
                 var printer = Provider.GetRequiredService<ReportPrinter>();
 
                 var report = await calc.Process();
@@ -39,7 +39,7 @@
         private static IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IReader, TxtReader>();
-            services.AddTransient<Counter>();
+            services.AddTransient<ICounter, Counter>();
             services.AddTransient<ReportPrinter>();
             services.Configure<Options>(options => Configuration.GetSection(nameof(Options)).Bind(options));
 

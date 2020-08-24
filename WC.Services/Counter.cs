@@ -51,7 +51,7 @@
                 report.Files.Add(fileReport);
             }
             
-            var matches = report.Files.SelectMany(x => x.Matches);
+            var matches = report.Files.SelectMany(x => x.Matches).ToList();
             report.Matches = CalculateMatches(matches);
 
             return report;
